@@ -2,3 +2,12 @@ pygments
 setuptools
 pytest
 pytest-cov
+pylint
+pytest-pylint
+sphinx
+sphinx_rtd_theme
+sphinx-autobuild
+sphinx-rtd-theme
+sphinxcontrib-websupport
+markupsafe
+docutils
