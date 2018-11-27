@@ -1,7 +1,7 @@
 DOCKER_REGISTRY_USER=ska-telescope
+PROJECT = ska-skeleton
 include .make/Makefile.mk
 
-PROJECT = ska-skeleton
 
 # name of the Docker volume used to cache eggs and wheels
 CACHE_VOLUME = $(PROJECT)-test-cache
