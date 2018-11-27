@@ -1,7 +1,8 @@
 # GitLab CI in conjunction with GitLab Runner can use Docker Engine to test and build any application.
 # Docker, when used with GitLab CI, runs each job in a separate and isolated container using the predefined image that is set up in .gitlab-ci.yml.
 # In this case we use the latest python docker image to build and test this project.
-image: registry.gitlab.com/ska-telescope/ska-docker/tango-builder:latest
+image: 
+  name: registry.gitlab.com/ska-telescope/ska-docker/tango-builder:latest
 
 variables:
   DOCKER_HOST: tcp://docker:2375
@@ -26,13 +27,12 @@ cache:
 # It is also specified that only the master branch will be subject of this job.
 
 stages:
-  - build
-  - test
+- build
+- test
 
 build:
   script:
   - make build
-  - make push
 
 test:
   script:
@@ -41,8 +41,3 @@ test:
   artifacts:
     paths:
     - public
-
-code_analysis:
-  script:
-    - pipenv run bash code-analysis.sh
-
