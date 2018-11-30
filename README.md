@@ -19,7 +19,7 @@ pipenv shell
 
 You will now be inside a pipenv shell with your virtual environment ready.
 
-Use `pipenv exit` to exit the virtual environment.
+Use `exit` to exit the pipenv environment.
 
 
 Testing
