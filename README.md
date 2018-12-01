@@ -40,3 +40,13 @@ Testing
  * By default it uses the [PEP8 style guide](Python's PEP8 style guide)
  * Use the provided `code-analysis.sh` script in order to run the code analysis in the `module` and `tests`
  * Code analysis should only raise document related warnings (i.e. `#FIXME` comments) before merging the code
+ 
+Writing documentation
+ --------------------
+ * The documentation generator for this project is derived from SKA's [SKA Developer Portal repository](https://github.com/ska-telescope/developer.skatelescope.org)
+ * The documentation can be edited under `./docs/src`
+ * In order to build the documentation for this specific project, execute the following under `./docs`:
+ ```bash
+make html
+```
+* The documentation can then be consulted by opening the file `./docs/build/html/index.html`
