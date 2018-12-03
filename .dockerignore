@@ -13,10 +13,15 @@ htmlcov
 coverage.xml
 .pytest_cache
 
-docs/_build
-docs/apidocs
-
 # ide
 .idea
 .eclipse
 .vscode
+
+.make
+Makefile
+Dockerfile
+.release
+.gitlab-ci.yml
+.gitignore
+
