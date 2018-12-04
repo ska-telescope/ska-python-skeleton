@@ -11,10 +11,23 @@ recommended method and the one used by default in this repo.
 
 Follow these steps at the project root:
 
+First, ensure that `~/.local/bin` is in your `PATH` with:
 ```bash
-pip install pipenv # if you don't have pipenv already installed on your system
-pipenv install
-pipenv shell
+> echo $PATH
+```
+
+In case `~/.local/bin` is not part of your `PATH` variable, under Linux add it with:
+```bash
+export PATH=~/.local/bin:$PATH
+```
+or the equivalent in your particular OS.
+
+Then proceed to install pipenv and the required environment packages:
+
+```bash
+> pip install pipenv # if you don't have pipenv already installed on your system
+> pipenv install
+> pipenv shell
 ```
 
 You will now be inside a pipenv shell with your virtual environment ready.
