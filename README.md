@@ -18,7 +18,7 @@ First, ensure that `~/.local/bin` is in your `PATH` with:
 
 In case `~/.local/bin` is not part of your `PATH` variable, under Linux add it with:
 ```bash
-export PATH=~/.local/bin:$PATH
+> export PATH=~/.local/bin:$PATH
 ```
 or the equivalent in your particular OS.
 
@@ -60,6 +60,6 @@ Writing documentation
  * The documentation can be edited under `./docs/src`
  * In order to build the documentation for this specific project, execute the following under `./docs`:
  ```bash
-make html
+> make html
 ```
 * The documentation can then be consulted by opening the file `./docs/build/html/index.html`
