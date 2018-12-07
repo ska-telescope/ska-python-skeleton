@@ -3,6 +3,11 @@ SKA Skeleton Project
 
 Briefly describe your project here
 
+Requirements
+------------
+
+The system used for development needs to have Python 3 and `pip` installed.
+
 Install 
 -------
 
