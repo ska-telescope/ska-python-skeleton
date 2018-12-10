@@ -6,7 +6,6 @@
 # TODO: Replace all the following code with the desired functionality for the package
 def example():
     """Example: Define non return function for subsequent test."""
-    pass
 
 
 def testing_example():
