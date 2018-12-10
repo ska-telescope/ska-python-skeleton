@@ -31,7 +31,7 @@ test:
   artifacts:
     paths:
     - public
-    
+     
 code_quality:
   image: docker:stable
   variables:
