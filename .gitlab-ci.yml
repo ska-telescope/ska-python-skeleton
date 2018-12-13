@@ -33,9 +33,9 @@ test:
    # - mkdir .public
    # - cp -r htmlcov/* .public
    # - mv .public public
-  # artifacts:
-    # paths:
-    # - public
+  artifacts:
+    paths:
+    - htmlcov
     
 pages:
   stage: deploy
