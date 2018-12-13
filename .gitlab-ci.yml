@@ -24,17 +24,22 @@ test:
    - docker-executor
   script:
    - pipenv run python setup.py test
-   - ls -la
-   - mkdir .public
-   - cp -r htmlcov/* .public
-   - mv .public public
-  artifacts:
-    paths:
-    - public
+   # - ls -la
+   # - mkdir .public
+   # - cp -r htmlcov/* .public
+   # - mv .public public
+  # artifacts:
+    # paths:
+    # - public
     
 pages:
   dependencies:
     - test
+  script:
+   - ls -la
+   - mkdir .public
+   - cp -r htmlcov/* .public
+   - mv .public public
   artifacts:
     paths:
       - public
