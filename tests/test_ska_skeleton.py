@@ -38,7 +38,7 @@ def test_package():
     assert ska_skeleton.testing_example() == 2
 
 	
-def test_ciao()
+def test_ciao():
 	lower = 900
 	upper = 1000
 	print("Prime numbers between",lower,"and",upper,"are:")
