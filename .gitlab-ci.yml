@@ -52,9 +52,9 @@ code_quality:
         --volume /var/run/docker.sock:/var/run/docker.sock
         "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
     - more gl-code-quality-report.json
-  artifacts:
-    reports:
-      codequality: gl-code-quality-report.json
+artifacts:
+    paths: [gl-code-quality-report.json]
+
 
 code_analysis:
   script:
