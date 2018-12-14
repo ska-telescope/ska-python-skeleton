@@ -29,29 +29,13 @@ test:
    - docker-executor
   script:
    - pipenv run python setup.py test
-   # - ls -la
-   # - mkdir .public
-   # - cp -r htmlcov/* .public
-   # - mv .public public
   artifacts:
     paths:
     - htmlcov
-    
-pages:
-  stage: deploy
-  dependencies:
-    - test
-  script:
-   - ls -la
-   - mkdir .public
-   - cp -r htmlcov/* .public
-   - mv .public public
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
      
 code_quality:
+  tags:
+    - docker-executor
   image: docker:stable
   variables:
     DOCKER_DRIVER: overlay2
@@ -75,3 +59,19 @@ code_quality:
 code_analysis:
   script:
     - pipenv run bash code-analysis.sh
+    
+pages:
+  stage: deploy
+  tags:
+   - docker-executor
+  dependencies:
+    - test
+  script:
+   - ls -la
+   - mkdir .public
+   - cp -r htmlcov/* .public
+   - mv .public public
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
