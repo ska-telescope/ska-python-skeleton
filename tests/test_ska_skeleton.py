@@ -36,3 +36,9 @@ def test_package():
     """Example: Assert the ska_skeleton package code."""
     assert ska_skeleton.example() is None
     assert ska_skeleton.testing_example() == 2
+
+	
+	
+	
+def test_ciao()
+	print("Ciao")
