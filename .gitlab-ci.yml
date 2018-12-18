@@ -15,23 +15,63 @@ before_script:
   - pip install pipenv
   - pipenv install
 
+stages:
+  - test
+  - deploy
+
 # The YAML file defines a set of jobs with constraints stating when they should be run. 
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always have to contain at least the script clause.
 # In this case we have only the test job which produce an artifacts (it must be placed into a directory called "public")
 # It is also specified that only the master branch will be subject of this job. 
 test:
+  stage: test
   tags:
    - docker-executor
   script:
    - pipenv run python setup.py test
+  artifacts:
+    paths:
+    - htmlcov
+     
+code_quality:
+  tags:
+    - docker-executor
+  image: docker:stable
+  variables:
+    DOCKER_DRIVER: overlay2
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  before_script:
+    - ls -la
+  script:
+    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
+    - docker run
+        --env SOURCE_CODE="$PWD"
+        --volume "$PWD":/code
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
+    - more gl-code-quality-report.json
+  artifacts:
+    paths: [gl-code-quality-report.json]
+
+
+code_analysis:
+  script:
+    - pipenv run bash code-analysis.sh
+    
+pages:
+  stage: deploy
+  tags:
+   - docker-executor
+  dependencies:
+    - test
+  script:
    - ls -la
    - mkdir .public
    - cp -r htmlcov/* .public
    - mv .public public
   artifacts:
     paths:
-    - public
-
-code_analysis:
-  script:
-    - pipenv run bash code-analysis.sh
+      - public
+    expire_in: 30 days
