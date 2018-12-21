@@ -29,6 +29,7 @@ test:
    - docker-executor
   script:
    - pipenv run python setup.py test
+   - mv coverage.xml htmlcov
   artifacts:
     paths:
     - htmlcov
