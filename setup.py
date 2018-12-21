@@ -45,6 +45,7 @@ setup(
     tests_require=[
         'pytest',
         'pytest-cov',
+        'pytest-json-report',
         'pycodestyle',
     ],
     extras_require={
