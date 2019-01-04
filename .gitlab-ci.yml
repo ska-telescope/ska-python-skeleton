@@ -1,7 +1,7 @@
 # GitLab CI in conjunction with GitLab Runner can use Docker Engine to test and build any application.
 # Docker, when used with GitLab CI, runs each job in a separate and isolated container using the predefined image that is set up in .gitlab-ci.yml.
 # In this case we use the latest python docker image to build and test this project.
-image: python:3.5
+image: python:3.5-slim
 
 # cache is used to specify a list of files and directories which should be cached between jobs. You can only use paths that are within the project workspace.
 # If cache is defined outside the scope of jobs, it means it is set globally and all jobs will use that definition
@@ -11,13 +11,13 @@ cache:
 # before_script is used to define the command that should be run before all jobs, including deploy jobs, but after the restoration of artifacts. 
 # This can be an array or a multi-line string.
 before_script:
-  - python -V  # Print out python version for debugging
   - pip install pipenv
   - pipenv install
 
 stages:
   - test
   - deploy
+  - versioning
 
 # The YAML file defines a set of jobs with constraints stating when they should be run. 
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always have to contain at least the script clause.
@@ -33,7 +33,20 @@ test:
   artifacts:
     paths:
     - htmlcov
-     
+
+versioning:
+  stage: versioning
+  tags:
+    - docker-executor
+  script:
+    - pipenv graph >> pipenv_deps.txt
+    - dpkg -l >> system_deps.txt
+    - mv pipenv_deps.txt htmlcov
+    - mv system_deps.txt htmlcov
+  artifacts:
+    paths:
+      - htmlcov
+
 code_quality:
   tags:
     - docker-executor
