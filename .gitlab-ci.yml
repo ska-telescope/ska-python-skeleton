@@ -24,8 +24,8 @@ stages:
 # It is also specified that only the master branch will be subject of this job. 
 test:
   stage: test
-  tags:
-   - docker-executor
+#  tags:
+#   - docker-executor
   script:
    - pipenv run python setup.py test
    - mkdir .public
@@ -79,8 +79,8 @@ code_analysis:
     
 pages:
   stage: deploy
-  tags:
-   - docker-executor
+#  tags:
+#   - docker-executor
   dependencies:
     - test
   script:
