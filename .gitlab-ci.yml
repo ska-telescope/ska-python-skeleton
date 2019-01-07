@@ -28,10 +28,12 @@ test:
    - docker-executor
   script:
    - pipenv run python setup.py test
-   - mv coverage.xml htmlcov
+   - mkdir .public
+   - cp coverage.xml .public/
+   - mv .public public
   artifacts:
     paths:
-    - htmlcov
+    - public
 
 dependency_check:
   stage: test
@@ -39,12 +41,14 @@ dependency_check:
     - pipenv graph >> pipenv_deps.txt
     - dpkg -l >> system_deps.txt
     - awk 'FNR>5 {print $2 ", " $3}' system_deps.txt >> system_deps.csv
-    - mv pipenv_deps.txt htmlcov
-    - mv system_deps.txt htmlcov
-    - mv system_deps.csv htmlcov
+    - mkdir .public
+    - cp pipenv_deps.txt .public/
+    - cp system_deps.txt .public/
+    - cp system_deps.csv .public/
+    - mv .public public
   artifacts:
     paths:
-      - htmlcov
+      - public
 
 code_quality:
   tags:
