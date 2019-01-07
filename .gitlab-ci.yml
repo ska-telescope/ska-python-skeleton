@@ -28,12 +28,10 @@ test:
 #   - docker-executor
   script:
    - pipenv run python setup.py test
-   - mkdir .public
-   - cp coverage.xml .public/
-   - mv .public public
+   - cp coverage.xml htmlcov/
   artifacts:
     paths:
-    - public
+    - htmlcov
 
 dependency_check:
   stage: test
