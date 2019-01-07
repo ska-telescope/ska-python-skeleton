@@ -17,7 +17,6 @@ before_script:
 stages:
   - test
   - deploy
-  - versioning
 
 # The YAML file defines a set of jobs with constraints stating when they should be run. 
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always have to contain at least the script clause.
@@ -34,15 +33,15 @@ test:
     paths:
     - htmlcov
 
-versioning:
-  stage: versioning
-  tags:
-    - docker-executor
+dependency_check:
+  stage: test
   script:
     - pipenv graph >> pipenv_deps.txt
     - dpkg -l >> system_deps.txt
+    - awk 'FNR>5 {print $2 ", " $3}' system_deps.txt >> system_deps.csv
     - mv pipenv_deps.txt htmlcov
     - mv system_deps.txt htmlcov
+    - mv system_deps.csv htmlcov
   artifacts:
     paths:
       - htmlcov
