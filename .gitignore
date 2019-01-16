@@ -14,6 +14,7 @@ htmlcov
 .coverage
 coverage.xml
 .pytest_cache
+*,cover
 
 docs/_build
 docs/apidocs
