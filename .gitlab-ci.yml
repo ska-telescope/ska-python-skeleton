@@ -33,7 +33,7 @@ test:
     paths:
     - htmlcov
 
-dependency_check:
+list_dependencies:
   stage: test
   script:
     - pipenv graph >> pipenv_deps.txt
