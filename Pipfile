@@ -1,7 +1,12 @@
 [[source]]
-url = "https://pypi.org/simple"
+url = "https://nexus.engageska-portugal.pt/repository/pypi-proxy/simple"
 verify_ssl = true
-name = "pypi"
+name = "nexus-proxy"
+
+[[source]]
+url = "https://nexus.engageska-portugal.pt/repository/pypi/simple"
+verify_ssl = true
+name = "nexus-hosted"
 
 [packages]
 docutils = "*"
