@@ -7,22 +7,22 @@ with open('README.md') as readme_file:
     readme = readme_file.read()
 
 setup(
-    name='ska_skeleton',
+    name='ska_python_skeleton',
     version='0.0.0',
     description="",
     long_description=readme + '\n\n',
     author="Your Name",
     author_email='your.email@mail.com',
-    url='https://github.com/ska-telescope/ska_skeleton',
+    url='https://github.com/ska-telescope/ska_python_skeleton',
     packages=[
-        'ska_skeleton',
+        'ska_python_skeleton',
     ],
-    package_dir={'ska_skeleton':
-                 'ska_skeleton'},
+    package_dir={'ska_python_skeleton':
+                 'ska_python_skeleton'},
     include_package_data=True,
     license="BSD license",
     zip_safe=False,
-    keywords='ska_skeleton',
+    keywords='ska_python_skeleton',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for the ska_skeleton module."""
+"""Tests for the ska_python_skeleton module."""
 import pytest
 
-from ska_skeleton import ska_skeleton
+from ska_python_skeleton import ska_python_skeleton
 
 
-# TODO: Replace all the following examples with tests for the ska_skeleton package code
+# TODO: Replace all the following examples with tests for the ska_python_skeleton package code
 def test_something():
     """Example: Assert with no defined return value."""
     assert True
@@ -27,12 +27,12 @@ def an_object():
     return {}
 
 
-def test_ska_skeleton(an_object):
+def test_ska_python_skeleton(an_object):
     """Example: Assert fixture return value."""
     assert an_object == {}
 
 
 def test_package():
-    """Example: Assert the ska_skeleton package code."""
-    assert ska_skeleton.example() is None
-    assert ska_skeleton.testing_example() == 2
+    """Example: Assert the ska_python_skeleton package code."""
+    assert ska_python_skeleton.example() is None
+    assert ska_python_skeleton.testing_example() == 2
