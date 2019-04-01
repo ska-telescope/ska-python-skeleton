@@ -13,7 +13,7 @@ setup(
     long_description=readme + '\n\n',
     author="Your Name",
     author_email='your.email@mail.com',
-    url='https://github.com/ska-telescope/ska_python_skeleton',
+    url='https://github.com/ska-telescope/ska-python-skeleton',
     packages=[
         'ska_python_skeleton',
     ],
@@ -22,7 +22,6 @@ setup(
     include_package_data=True,
     license="BSD license",
     zip_safe=False,
-    keywords='ska_python_skeleton',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
