@@ -1,7 +1,7 @@
-SKA Skeleton Project
-====================
+SKA Python Skeleton Project
+===========================
 
-[![Documentation Status](https://readthedocs.org/projects/ska-skeleton/badge/?version=latest)](https://developer.skatelescope.org/projects/skeleton/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/ska-python-skeleton/badge/?version=latest)](https://developer.skatelescope.org/projects/skeleton/en/latest/?badge=latest)
 
 Briefly describe your project here
 

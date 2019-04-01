@@ -5,7 +5,7 @@ echo
 
 echo "MODULE ANALYSIS"
 echo "---------------"
-pylint ska_skeleton
+pylint ska_python_skeleton
 
 echo "TESTS ANALYSIS"
 echo "--------------"
