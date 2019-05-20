@@ -59,6 +59,7 @@ Testing
  * Use [Pylint](https://www.pylint.org) as the code analysis framework
  * By default it uses the [PEP8 style guide](https://www.python.org/dev/peps/pep-0008/)
  * Use the provided `code-analysis.sh` script in order to run the code analysis in the `module` and `tests`
+ * Code analysis should be run by calling `pylint ska_python_skeleton`. All pertaining options reside under the `.pylintrc` file.
  * Code analysis should only raise document related warnings (i.e. `#FIXME` comments) before merging the code
  
 Writing documentation
