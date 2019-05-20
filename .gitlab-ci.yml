@@ -73,7 +73,8 @@ code_quality:
 
 code_analysis:
   script:
-    - pipenv run bash code-analysis.sh
+    - pipenv run pylint ska_python_skeleton
+    - pipenv run pylint tests
     
 pages:
   stage: deploy
