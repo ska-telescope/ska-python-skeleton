@@ -26,10 +26,9 @@
   package/guide
 
 
-
-Package-name documentation
+Project-name documentation
 ==========================
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+These are all the packages, functions and scripts that form part of the project.
 
 - :doc:`package/guide`
