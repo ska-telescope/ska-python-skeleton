@@ -9,12 +9,14 @@ def function_example():
 
 
 # TODO: Replace all the following code with the desired functionality for the package
-class SKA():
-    """Define class and it's attributes"""
+class SKA:
+    """Define class, methods etc"""
+
+    something = 0
 
     def example(self):
         """Example: Define non return function for subsequent test."""
 
-    def testing_example(self):
+    def example_2(self):
         """Example: Define function for subsequent test with specific return value."""
         return 2

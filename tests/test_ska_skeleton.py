@@ -4,7 +4,7 @@
 """Tests for the ska_python_skeleton module."""
 import pytest
 
-from ska_python_skeleton import main
+from ska_python_skeleton import ska_python_skeleton
 
 
 # TODO: Replace all the following examples with tests for the ska_python_skeleton package code
@@ -34,5 +34,7 @@ def test_ska_python_skeleton(an_object):
 
 def test_package():
     """Example: Assert the ska_python_skeleton package code."""
-    assert main.example() is None
-    assert main.testing_example() == 2
+    assert ska_python_skeleton.function_example() is None
+    foo = ska_python_skeleton.SKA()
+    assert foo.example_2() == 2
+    assert foo.example() is None
