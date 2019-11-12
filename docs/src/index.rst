@@ -9,17 +9,27 @@
 .. Hidden toctree to manage the sidebar navigation.
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
   :caption: Home
   :hidden:
 
 
-.. COMMUNITY SECTION ==================================================
+.. README =============================================================
 
-.. Hidden toctree to manage the sidebar navigation.
+.. This project most likely has it's own README. We include it here.
 
 .. toctree::
-  :maxdepth: 1
+   :maxdepth: 2
+   :caption: Readme
+
+   README
+
+.. COMMUNITY SECTION ==================================================
+
+..
+
+.. toctree::
+  :maxdepth: 2
   :caption: Package-name
   :hidden:
 
