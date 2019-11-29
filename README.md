@@ -66,8 +66,13 @@ Writing documentation
  --------------------
  * The documentation generator for this project is derived from SKA's [SKA Developer Portal repository](https://github.com/ska-telescope/developer.skatelescope.org)
  * The documentation can be edited under `./docs/src`
+ * If you want to include only your README.md file, create a symbolic link inside the `./docs/src` directory if the existing one does not work:
+ ```bash
+$ cd docs/src
+$ ln -s ../../README.md README.md
+```
  * In order to build the documentation for this specific project, execute the following under `./docs`:
  ```bash
-> make html
+$ make html
 ```
 * The documentation can then be consulted by opening the file `./docs/build/html/index.html`
