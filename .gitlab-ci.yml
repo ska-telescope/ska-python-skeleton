@@ -29,10 +29,12 @@ test:
 #   - docker-executor
   script:
    - pipenv run python setup.py test
-   - cp coverage.xml /build/reports/code-coverage.xml
+   - mkdir ./build
+   - mkdir ./build/reports
+   - cp coverage.xml ./build/reports/code-coverage.xml
   artifacts:
     paths:
-    - build
+    - ./build
 
 list_dependencies:
   stage: test
@@ -80,6 +82,7 @@ code_analysis:
   script:
     - pipenv run pylint ska_python_skeleton
     - pipenv run pylint tests
+    - cp
   when: always
   artifacts:
     paths:
