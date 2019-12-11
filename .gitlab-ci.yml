@@ -32,6 +32,7 @@ test:
    - mkdir ./build
    - mkdir ./build/reports
    - cp coverage.xml ./build/reports/code-coverage.xml
+   - cp unit-tests.xml ./build/reports/unit-tests.xml
   artifacts:
     paths:
     - ./build
@@ -82,7 +83,6 @@ code_analysis:
   script:
     - pipenv run pylint ska_python_skeleton
     - pipenv run pylint tests
-    - cp /build/reports/unit-tests.xml ./build/reports/unit-tests.xml
   when: always
   artifacts:
     paths:
