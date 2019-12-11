@@ -31,8 +31,8 @@ test:
    - pipenv run python setup.py test
    - mkdir ./build
    - mkdir ./build/reports
-   - cp coverage.xml ./build/reports/code-coverage.xml
-   - cp unit-tests.xml ./build/reports/unit-tests.xml
+   - mv coverage.xml ./build/reports/code-coverage.xml
+   - mv unit-tests.xml ./build/reports/unit-tests.xml
   artifacts:
     paths:
     - ./build
