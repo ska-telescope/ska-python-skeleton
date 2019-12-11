@@ -29,7 +29,7 @@ test:
 #   - docker-executor
   script:
    - pipenv run python setup.py test
-   - cp coverage.xml ./build/reports/code-coverage.xml
+   - cp coverage.xml /build/reports/code-coverage.xml
   artifacts:
     paths:
     - build
