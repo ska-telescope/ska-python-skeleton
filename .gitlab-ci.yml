@@ -29,10 +29,10 @@ test:
 #   - docker-executor
   script:
    - pipenv run python setup.py test
-   - cp coverage.xml htmlcov/
+   - cp coverage.xml ./build/reports/code-coverage.xml
   artifacts:
     paths:
-    - htmlcov
+    - build
 
 list_dependencies:
   stage: test
@@ -72,18 +72,17 @@ code_quality:
     paths: [gl-code-quality-report.json]
 
 
-linting:
-  stage: linting
+code_analysis:
   image: nexus.engageska-portugal.pt/ska-docker/ska-python-buildenv:latest
   tags:
     - docker-executor
+  stage: linting
   script:
     - pipenv run pylint ska_python_skeleton
     - pipenv run pylint tests
-   artifacts:
+  artifacts:
     paths:
       - ./build
-
 
 pages:
   stage: deploy
