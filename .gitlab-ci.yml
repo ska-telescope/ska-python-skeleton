@@ -82,7 +82,7 @@ code_analysis:
   script:
     - pipenv run pylint ska_python_skeleton
     - pipenv run pylint tests
-    - cp
+    - cp /build/reports/unit-tests.xml ./build/reports/unit-tests.xml
   when: always
   artifacts:
     paths:
