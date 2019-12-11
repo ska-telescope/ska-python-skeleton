@@ -80,6 +80,7 @@ code_analysis:
   script:
     - pipenv run pylint ska_python_skeleton
     - pipenv run pylint tests
+  when: always
   artifacts:
     paths:
       - ./build
