@@ -90,8 +90,8 @@ code_analysis:
 
 pages:
   stage: deploy
-#  tags:
-#   - docker-executor
+  tags:
+   - docker-executor
   dependencies:
     - test
   script:
