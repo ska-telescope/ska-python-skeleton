@@ -78,8 +78,8 @@ linting:
     - docker-executor
   stage: linting
   script:
-    - pipenv run pylint ska_python_skeleton
-    - pipenv run pylint tests
+    - pipenv run pylint ska_python_skeleton > ./build/reports/linting.xml
+#    - pipenv run pylint tests
   when: always
   artifacts:
     paths:
@@ -95,6 +95,7 @@ pages:
    - ls -la
    - mkdir .public
    - cp -r htmlcov/* .public
+   - rm -rf htmlcov
    - mv .public public
   artifacts:
     paths:
