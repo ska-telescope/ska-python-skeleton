@@ -32,6 +32,7 @@ test:
   artifacts:
     paths:
     - ./build
+    - htmlcov
 
 list_dependencies:
   stage: test
