@@ -22,7 +22,6 @@ stages:
 # The YAML file defines a set of jobs with constraints stating when they should be run. 
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always have to contain at least the script clause.
 # In this case we have only the test job which produce an artifacts (it must be placed into a directory called "public")
-# It is also specified that only the master branch will be subject of this job. 
 test:
   stage: test
 #  tags:
@@ -32,7 +31,6 @@ test:
    - mkdir ./build
    - mkdir ./build/reports
    - mv coverage.xml ./build/reports/code-coverage.xml
-   - mv unit-tests.xml ./build/reports/unit-tests.xml
   artifacts:
     paths:
     - ./build
@@ -75,7 +73,7 @@ list_dependencies:
 #    paths: [gl-code-quality-report.json]
 
 
-code_analysis:
+linting:
   image: nexus.engageska-portugal.pt/ska-docker/ska-python-buildenv:latest
   tags:
     - docker-executor
