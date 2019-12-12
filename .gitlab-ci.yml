@@ -28,8 +28,6 @@ test:
 #   - docker-executor
   script:
    - pipenv run python setup.py test
-   - mkdir ./build
-   - mkdir ./build/reports
    - mv coverage.xml ./build/reports/code-coverage.xml
   artifacts:
     paths:
