@@ -30,7 +30,7 @@ test:
 #   - docker-executor
   script:
   #  - pipenv run python setup.py test
-   - python setup.py test
+   - python3 setup.py test
    - mv coverage.xml ./build/reports/code-coverage.xml
   artifacts:
     paths:
