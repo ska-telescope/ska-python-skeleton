@@ -10,8 +10,8 @@ cache:
 # before_script is used to define the command that should be run before all jobs, including deploy jobs, but after the restoration of artifacts.
 # This can be an array or a multi-line string.
 before_script:
-  - pip install pipenv
-  - pipenv install
+  - pip install pipdeptree
+  
 
 stages:
   - test
@@ -29,7 +29,8 @@ test:
 #  tags:
 #   - docker-executor
   script:
-   - pipenv run python setup.py test
+  #  - pipenv run python setup.py test
+   - python setup.py test
    - mv coverage.xml ./build/reports/code-coverage.xml
   artifacts:
     paths:
@@ -39,11 +40,14 @@ test:
 list_dependencies:
   stage: test
   script:
-    - pipenv graph >> pipenv_deps.txt
+    # - pipenv graph >> pipenv_deps.txt
+    - pipdeptree --json >> pip_deps.json
+    - pipdeptree >> pip_deps.txt
     - dpkg -l >> system_deps.txt
     - awk 'FNR>5 {print $2 ", " $3}' system_deps.txt >> system_deps.csv
     - mkdir .public
-    - cp pipenv_deps.txt .public/
+    - cp pip_deps.txt .public/
+    - cp pip_deps.json .public/
     - cp system_deps.txt .public/
     - cp system_deps.csv .public/
     - mv .public public
