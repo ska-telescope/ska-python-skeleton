@@ -12,3 +12,5 @@ sphinx_rtd_theme
 sphinx-autobuild
 sphinx-rtd-theme
 sphinxcontrib-websupport
+pipdeptree
+pylint_junit
