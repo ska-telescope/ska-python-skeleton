@@ -12,3 +12,4 @@ sphinx_rtd_theme
 sphinx-autobuild
 sphinx-rtd-theme
 sphinxcontrib-websupport
+pipdeptree
