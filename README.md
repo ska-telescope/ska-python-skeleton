@@ -14,9 +14,9 @@ Install
 -------
 
 **Always** use a virtual environment. [Pipenv](https://pipenv.readthedocs.io/en/latest/) is now Python's officially
-recommended method and the one used by default in this repo.
+recommended method, but we are not using it for installing requirements when building on the CI Pipeline. You are encouraged to use your preferred environment isolation (i.e. `pip`, `conda` or `pipenv` while developing locally.
 
-Follow these steps at the project root:
+For working with `Pipenv`, follow these steps at the project root:
 
 First, ensure that `~/.local/bin` is in your `PATH` with:
 ```bash
