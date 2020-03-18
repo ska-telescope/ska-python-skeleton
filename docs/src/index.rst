@@ -22,7 +22,7 @@
    :maxdepth: 2
    :caption: Readme
 
-   README
+   ../../README
 
 .. COMMUNITY SECTION ==================================================
 
@@ -30,14 +30,14 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Package-name
+  :caption: Package name
   :hidden:
 
   package/guide
 
 
-Project-name documentation
-==========================
+Project-name documentation HEADING
+==================================
 
 These are all the packages, functions and scripts that form part of the project.
 
