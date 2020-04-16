@@ -4,7 +4,7 @@
 """Tests for the ska_python_skeleton module."""
 import pytest
 
-from ska.ska_python_skeleton import SKA, function_example
+from ska.skeleton import SKA, function_example
 
 
 # TODO: Replace all the following examples with tests for the ska_python_skeleton package code
