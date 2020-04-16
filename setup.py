@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import setuptools
 from setuptools import setup
 
 with open('README.md') as readme_file:
