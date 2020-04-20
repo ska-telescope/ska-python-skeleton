@@ -76,3 +76,14 @@ $ ln -s ../../README.md README.md
 $ make html
 ```
 * The documentation can then be consulted by opening the file `./docs/build/html/index.html`
+
+Development
+-----------
+
+### PyCharm
+
+As this project uses a `src` [folder structure](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure),
+under _Preferences > Project Structure_, the `src` folder needs to be marked as "Sources".  That will
+allow the interpreter to be aware of the package from folders like `tests` that are outside of `src`.
+When adding Run/Debug configurations, make sure "Add content roots to PYTHONPATH" and
+"Add source roots to PYTHONPATH" are checked.

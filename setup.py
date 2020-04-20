@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import setuptools
 from setuptools import setup
 
 with open('README.md') as readme_file:
@@ -14,11 +15,9 @@ setup(
     author="Your Name",
     author_email='your.email@mail.com',
     url='https://github.com/ska-telescope/ska-python-skeleton',
-    packages=[
-        'ska_python_skeleton',
-    ],
-    package_dir={'ska_python_skeleton':
-                 'ska_python_skeleton'},
+    packages=setuptools.find_namespace_packages(where="src", include=["ska.*"]),
+    namespace_packages=["ska"],
+    package_dir={"": "src"},
     include_package_data=True,
     license="BSD license",
     zip_safe=False,
