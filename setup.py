@@ -16,7 +16,6 @@ setup(
     author_email='your.email@mail.com',
     url='https://github.com/ska-telescope/ska-python-skeleton',
     packages=setuptools.find_namespace_packages(where="src", include=["ska.*"]),
-    namespace_packages=["ska"],
     package_dir={"": "src"},
     include_package_data=True,
     license="BSD license",
