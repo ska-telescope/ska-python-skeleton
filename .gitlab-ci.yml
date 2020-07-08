@@ -11,14 +11,14 @@ cache:
 # This can be an array or a multi-line string.
 before_script:
   - python3 -m pip install -r docker-requirements.txt
-  
+
 
 stages:
   - test
   - linting
   - deploy
 
-# The YAML file defines a set of jobs with constraints stating when they should be run. 
+# The YAML file defines a set of jobs with constraints stating when they should be run.
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always
 #  have to contain at least the script clause.
 # In this case we have only the test job which produces a coverage report and the unittest output (see setup.cfg), and
