@@ -5,8 +5,8 @@ image: nexus.engageska-portugal.pt/ska-docker/ska-python-buildenv:latest
 
 # cache is used to specify a list of files and directories which should be cached between jobs. You can only use paths that are within the project workspace.
 # If cache is defined outside the scope of jobs, it means it is set globally and all jobs will use that definition
-cache:
-  paths:
+# cache:
+#   paths:
 # before_script is used to define the command that should be run before all jobs, including deploy jobs, but after the restoration of artifacts.
 # This can be an array or a multi-line string.
 before_script:
@@ -16,6 +16,7 @@ before_script:
 stages:
   - test
   - linting
+  - publish
   - deploy
 
 # The YAML file defines a set of jobs with constraints stating when they should be run.
@@ -27,7 +28,7 @@ stages:
 test:
   stage: test
 #  tags:
-#   - docker-executor
+#   - k8srunner
   script:
   #  - pipenv run python setup.py test
    - python3 setup.py test
@@ -58,7 +59,7 @@ list_dependencies:
 linting:
   image: nexus.engageska-portugal.pt/ska-docker/ska-python-buildenv:latest
   tags:
-    - docker-executor
+    - k8srunner
   stage: linting
   script:
     - make lint
@@ -70,7 +71,7 @@ linting:
 pages:
   stage: deploy
   tags:
-   - docker-executor
+   - k8srunner
   dependencies:
     - test
   script:
@@ -84,16 +85,38 @@ pages:
       - public
     expire_in: 30 days
 
-create ci metrics:
-  stage: .post
-  image: nexus.engageska-portugal.pt/ska-docker/ska-python-buildenv:latest
-  when: always
+# *********************************************
+# The ci badges are generated from the test results found in specified paths.
+# First we need to copy the test result files to the correct paths.
+move-test-artifacts:
+  stage: publish
   tags:
-    - docker-executor
+    - k8srunner
+  image: nexus.engageska-portugal.pt/ska-docker/deploy:0.4.3
   script:
-    # Gitlab CI badges creation: START
-    - curl -s https://gitlab.com/ska-telescope/ci-metrics-utilities/raw/master/scripts/ci-badges-func.sh | sh
-    # Gitlab CI badges creation: END
+    - if true; then echo "script passed"; fi
+  after_script:
+# NOTE: THE source PATHS (path/to/) ARE EXAMPLES ONLY AND SHOULD BE CHANGED
+    - mkdir build/reports
+    - mv path/to/report.xml build/reports/unit-tests.xml
+    - mv path/to/coverage.xml build/reports/code-coverage.xml
+    - mv path/to/linting.xml build/reports/linting.xml
+    - cat build/reports/linting.xml
   artifacts:
     paths:
-      - ./build
+      - build
+
+# Standardised included jobs
+# Uncomment the variables and helm chart job if you build k8s resources in your project
+# variables:
+#   CHARTS_TO_PUBLISH: chart-1 chart-2
+include:
+# Helm Chart Publish
+# https://developer.skatelescope.org/en/latest/development/software_package_release_procedure.html#package-and-publish-helm-charts-to-the-ska-helm-chart-repository
+# - project: 'ska-telescope/templates-repository'
+#   file: 'gitlab-ci/includes/helm_publish.yml'
+
+# Create Gitlab CI badges from CI metrics
+# https://developer.skatelescope.org/en/latest/tools/continuousintegration.html#automated-collection-of-ci-health-metrics-as-part-of-the-ci-pipeline
+- project: 'ska-telescope/templates-repository'
+  file: 'gitlab-ci/includes/post_step.yml'
