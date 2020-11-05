@@ -17,6 +17,7 @@ coverage.xml
 *,cover
 
 docs/_build
+docs/src/_build
 docs/apidocs
 
 # ide
