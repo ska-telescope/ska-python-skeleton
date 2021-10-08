@@ -92,7 +92,7 @@ move-test-artifacts:
   stage: publish
   tags:
     - k8srunner
-  image: SKA_K8S_TOOLS_DEPLOY_IMAGE
+  image: $SKA_K8S_TOOLS_DEPLOY_IMAGE
   script:
     - if true; then echo "script passed"; fi
   after_script:
