@@ -1,5 +1,5 @@
 SKA Python Skeleton Project
-===========================
+============================
 
 [![Documentation Status](https://readthedocs.org/projects/ska-telescope-templates-ska-python-skeleton/badge/?version=latest)](https://developer.skatelescope.org/projects/ska-python-skeleton/en/latest/?badge=latest)
 
