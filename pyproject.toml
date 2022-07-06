@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "ska-python-skeleton"
+version = "0.1.0"
+description = "Skeleton project to get up and running in Python alongside the SKAO guidelines and best practices including testing, linting, CI/CD pipelines, universal directory layout etc"
+authors = ["Your Name <you@example.com>"]
+license = "BSD-3-Clause"
+packages = [
+    { include = "ska_python_skeleton", from = "src" },
+]
+
+[[tool.poetry.source]]
+name = 'ska-nexus'
+url = 'https://artefact.skao.int/repository/pypi-internal/simple'
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+black = "^22.6.0"
+flake8 = "^4.0.1"
+pylint = "^2.14.4"
+pylint-junit = "^0.3.2"
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

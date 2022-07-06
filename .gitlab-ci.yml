@@ -1,122 +1,48 @@
-# GitLab CI in conjunction with GitLab Runner can use Docker Engine to test and build any application.
-# Docker, when used with GitLab CI, runs each job in a separate and isolated container using the predefined image that is set up in .gitlab-ci.yml.
-# In this case we use the latest python docker image to build and test this project.
-image: $SKA_PYTHON_PYTANGO_BUILDER_IMAGE
+# See: https://docs.gitlab.com/ee/ci/yaml/includes.html
+image: $SKA_K8S_TOOLS_DOCKER_BUILDER_IMAGE
 
-# cache is used to specify a list of files and directories which should be cached between jobs. You can only use paths that are within the project workspace.
-# If cache is defined outside the scope of jobs, it means it is set globally and all jobs will use that definition
-# cache:
-#   paths:
-# before_script is used to define the command that should be run before all jobs, including deploy jobs, but after the restoration of artifacts.
-# This can be an array or a multi-line string.
-before_script:
-  - python3 -m pip install -r docker-requirements.txt
-
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
+  - lint
+  - build
   - test
-  - linting
+  - scan
   - publish
-  - deploy
+  - pages
 
-# The YAML file defines a set of jobs with constraints stating when they should be run.
-# You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always
-#  have to contain at least the script clause.
-# In this case we have only the test job which produces a coverage report and the unittest output (see setup.cfg), and
-#  the coverage xml report is moved to the reports directory while the html output is persisted for use by the pages
-#  job. TODO: possibly a candidate for refactor / renaming later on.
-test:
-  stage: test
-#  tags:
-#   - k8srunner
-  script:
-  #  - pipenv run python setup.py test
-   - python3 setup.py test
-   - mv coverage.xml ./build/reports/code-coverage.xml
-  artifacts:
-    paths:
-    - ./build
-    - htmlcov
-
-list_dependencies:
-  stage: test
-  script:
-    # - pipenv graph >> pipenv_deps.txt
-    - pipdeptree --json >> pip_deps.json
-    - pipdeptree >> pip_deps.txt
-    - dpkg -l >> system_deps.txt
-    - awk 'FNR>5 {print $2 ", " $3}' system_deps.txt >> system_deps.csv
-    - mkdir .public
-    - cp pip_deps.txt .public/
-    - cp pip_deps.json .public/
-    - cp system_deps.txt .public/
-    - cp system_deps.csv .public/
-    - mv .public public
-  artifacts:
-    paths:
-      - public
-
-linting:
-  image: $SKA_PYTHON_PYTANGO_BUILDER_IMAGE
-  tags:
-    - k8srunner
-  stage: linting
-  script:
-    - make lint
-  when: always
-  artifacts:
-    paths:
-      - ./build
-
-pages:
-  stage: deploy
-  tags:
-   - k8srunner
-  dependencies:
-    - test
-  script:
-   - ls -la
-   - mkdir .public
-   - cp -r htmlcov/* .public
-   - rm -rf htmlcov
-   - mv .public public
-  artifacts:
-    paths:
-      - public
-    expire_in: 30 days
-
-# *********************************************
-# The ci badges are generated from the test results found in specified paths.
-# First we need to copy the test result files to the correct paths.
-move-test-artifacts:
-  stage: publish
-  tags:
-    - k8srunner
-  image: $SKA_K8S_TOOLS_DEPLOY_IMAGE
-  script:
-    - if true; then echo "script passed"; fi
-  after_script:
-# NOTE: THE source PATHS (path/to/) ARE EXAMPLES ONLY AND SHOULD BE CHANGED
-    - mkdir build/reports
-    - mv path/to/report.xml build/reports/unit-tests.xml
-    - mv path/to/coverage.xml build/reports/code-coverage.xml
-    - mv path/to/linting.xml build/reports/linting.xml
-    - cat build/reports/linting.xml
-  artifacts:
-    paths:
-      - build
-
-# Standardised included jobs
-# Uncomment the variables and helm chart job if you build k8s resources in your project
-# variables:
-#   CHARTS_TO_PUBLISH: chart-1 chart-2
+# Include CI templates
 include:
-# Helm Chart Publish
-# https://developer.skatelescope.org/en/latest/development/software_package_release_procedure.html#package-and-publish-helm-charts-to-the-ska-helm-chart-repository
-# - project: 'ska-telescope/templates-repository'
-#   file: 'gitlab-ci/includes/helm_publish.yml'
+  # OCI Images
+  # do a custom set of build and publish stages
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/oci-image-lint.gitlab-ci.yml"
 
-# Create Gitlab CI badges from CI metrics
-# https://developer.skatelescope.org/en/latest/tools/continuousintegration.html#automated-collection-of-ci-health-metrics-as-part-of-the-ci-pipeline
-- project: 'ska-telescope/templates-repository'
-  file: 'gitlab-ci/includes/post_step.yml'
+  # Helm Charts
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/helm-chart.gitlab-ci.yml"
+
+  # Raw
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/raw.gitlab-ci.yml"
+
+  # RPM
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/rpm.gitlab-ci.yml"
+
+  # Conan
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/conan.gitlab-ci.yml"
+
+  # Docs pages
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/docs-pages.gitlab-ci.yml"
+
+  # .post step finalisers eg: badges
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
+
+  # k8s steps
+  - project: "ska-telescope/templates-repository"
+    file: "gitlab-ci/includes/k8s.gitlab-ci.yml"

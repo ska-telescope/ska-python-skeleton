@@ -1,27 +1,20 @@
-# Use bash shell with pipefail option enabled so that the return status of a
-# piped command is the value of the last (rightmost) commnand to exit with a
-# non-zero status. This lets us pipe output into tee but still exit on test
-# failures.
-SHELL = /bin/bash
-.SHELLFLAGS = -o pipefail -c
+# include OCI Images support
+include .make/oci.mk
 
-all: test lint
+# include k8s support
+include .make/k8s.mk
 
-# The following steps copy across useful output to this volume which can
-# then be extracted to form the CI summary for the test procedure.
-test:
+# include Helm Chart support
+include .make/helm.mk
 
-	 python setup.py test | tee ./build/setup_py_test.stdout; \
-	 mv coverage.xml ./build/reports/code-coverage.xml;
+# Include Python support
+include .make/python.mk
 
-# The following steps copy across useful output to this volume which can
-# then be extracted to form the CI summary for the test procedure.
-lint:
+# include raw support
+include .make/raw.mk
 
-	# FIXME pylint needs to run twice since there is no way go gather the text and junit xml output at the same time
-	pip3 install pylint2junit; \
-	pylint --output-format=parseable src/ska/skeleton | tee ./build/code_analysis.stdout; \
-	pylint --output-format=pylint2junit.JunitReporter src/ska/skeleton > ./build/reports/linting.xml;
+# include core make support
+include .make/base.mk
 
-
-.PHONY: all test lint
+# include your own private variables for custom deployment configuration
+-include PrivateRules.mak
