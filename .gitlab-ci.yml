@@ -14,35 +14,27 @@ stages:
 
 # Include CI templates
 include:
-  # OCI Images
-  # do a custom set of build and publish stages
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/oci-image-lint.gitlab-ci.yml"
+    # Python
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/python.gitlab-ci.yml'
 
-  # Helm Charts
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/helm-chart.gitlab-ci.yml"
+    # Docs pages
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/docs-pages.gitlab-ci.yml'
 
-  # Raw
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/raw.gitlab-ci.yml"
+    # Tag Based GitLab Release Management
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/release.gitlab-ci.yml'
 
-  # RPM
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/rpm.gitlab-ci.yml"
+    # Build and push the docker image
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/oci-image.gitlab-ci.yml'
 
-  # Conan
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/conan.gitlab-ci.yml"
+    # Helm building and pushing
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/helm-chart.gitlab-ci.yml'
+    
+    # .post step finalisers eg: badges
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/finaliser.gitlab-ci.yml'
 
-  # Docs pages
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/docs-pages.gitlab-ci.yml"
-
-  # .post step finalisers eg: badges
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/finaliser.gitlab-ci.yml"
-
-  # k8s steps
-  - project: "ska-telescope/templates-repository"
-    file: "gitlab-ci/includes/k8s.gitlab-ci.yml"
