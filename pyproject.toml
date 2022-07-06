@@ -13,16 +13,17 @@ name = 'ska-nexus'
 url = 'https://artefact.skao.int/repository/pypi-internal/simple'
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"
 black = "^22.6.0"
 flake8 = "^4.0.1"
-pylint = "^2.14.4"
+pylint = "^2.12.2"
 pylint-junit = "^0.3.2"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
+build = "^0.8.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
