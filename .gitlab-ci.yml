@@ -15,6 +15,7 @@ before_script:
 
 stages:
   - test
+  - build
   - linting
   - publish
   - deploy
