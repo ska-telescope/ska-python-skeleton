@@ -15,7 +15,6 @@ before_script:
 
 stages:
   - test
-  - build
   - linting
   - publish
   - deploy
@@ -122,6 +121,4 @@ include:
 - project: 'ska-telescope/templates-repository'
   file: 'gitlab-ci/includes/post_step.yml'
 
-- project: "ska-telescope/templates-repository"
-  file: "gitlab-ci/includes/python.gitlab-ci.yml"
 
