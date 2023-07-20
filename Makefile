@@ -25,3 +25,32 @@ lint:
 
 
 .PHONY: all test lint
+
+NOTEBOOK_IGNORE_FILES = not notebook.ipynb
+
+#
+# include makefile to pick up the standard Make targets, e.g., 'make build'
+# build, 'make push' docker push procedure, etc. The other Make targets
+# ('make interactive', 'make test', etc.) are defined in this file.
+#
+
+# include OCI Images support
+include .make/oci.mk
+
+# include k8s support
+include .make/k8s.mk
+
+# include Helm Chart support
+include .make/helm.mk
+
+# Include Python support
+include .make/python.mk
+
+# include raw support
+include .make/raw.mk
+
+# include core make support
+include .make/base.mk
+
+# include your own private variables for custom deployment configuration
+-include PrivateRules.mak
