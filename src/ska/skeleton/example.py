@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#"""Define function placeholders and test function examples."""
+# """Define function placeholders and test function examples."""
 
 
 # TODO: Replace all the following code with the desired functionality for the package
