@@ -19,6 +19,7 @@ stages:
   - test
   - deploy
   - integration
+  - staging
   - publish
   - scan
   - pages
