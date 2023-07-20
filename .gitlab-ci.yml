@@ -65,19 +65,55 @@ include:
   - project: 'ska-telescope/templates-repository'
     file: 'gitlab-ci/includes/deploy.gitlab-ci.yml'
 
-# Standardised included jobs
-# Uncomment the variables and helm chart job if you build k8s resources in your project
-# variables:
-#   CHARTS_TO_PUBLISH: chart-1 chart-2
-include:
-# Helm Chart Publish
-# https://developer.skatelescope.org/en/latest/development/software_package_release_procedure.html#package-and-publish-helm-charts-to-the-ska-helm-chart-repository
-# - project: 'ska-telescope/templates-repository'
-#   file: 'gitlab-ci/includes/helm_publish.yml'
+python-test:
+  before_script:
+    - '[ -f .make/python.mk ] || (echo "File python.mk not included in Makefile; exit 1")'
+    - 'make help | grep python-test'
+    - poetry config virtualenvs.in-project true
+    - echo "python-build Setting.. poetry config virtualenvs.create $POETRY_CONFIG_VIRTUALENVS_CREATE"
+    - poetry config virtualenvs.create $POETRY_CONFIG_VIRTUALENVS_CREATE
+    - |
+      if [[ ! -z "$PYTANGO_VERSION"  ]]; then \
+        echo "Received pytango version: $PYTANGO_VERSION" ; \
+        poetry add pytango==$PYTANGO_VERSION
+      fi
+      if [[ -f pyproject.toml ]]; then
+        echo "python-test: Installing with poetry";
+        time poetry install;
+      else
+        if  [[ -f requirements.txt ]]; then
+          echo "python-test: Installing with pip";
+          time pip3 install -r requirements.txt;
+        fi;
+      fi;
 
-# Create Gitlab CI badges from CI metrics
-# https://developer.skatelescope.org/en/latest/tools/continuousintegration.html#automated-collection-of-ci-health-metrics-as-part-of-the-ci-pipeline
-- project: 'ska-telescope/templates-repository'
-  file: 'gitlab-ci/includes/post_step.yml'
+k8s-test-no-operator:
+  extends: k8s-test
+  variables:
+    KUBE_NAMESPACE: 'ci-$CI_PROJECT_NAME-$CI_COMMIT_SHORT_SHA-no-op'
+    SKA_TANGO_OPERATOR: 'false'
+  artifacts:
+    name: "$CI_PROJECT_NAME-$CI_JOB_ID"
+    paths:
+      - "build/"
+    reports:
+      junit: build/report.xml
+    when: always
+  environment:
+    name: test/$CI_COMMIT_REF_SLUG-no-op
+    on_stop: stop-k8s-test-no-operator
+    auto_stop_in: 1 minute
+  rules:
+    - exists:
+        - tests/**/*
+
+stop-k8s-test-no-operator:
+  extends: stop-k8s-test
+  when: manual
+  variables:
+    KUBE_NAMESPACE: 'ci-$CI_PROJECT_NAME-$CI_COMMIT_SHORT_SHA-no-op'
+  environment:
+    name: test/$CI_COMMIT_REF_SLUG-no-op
+    action: stop
 
 
