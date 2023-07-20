@@ -4,9 +4,6 @@ version = "0.4.26"
 description = "SKA Python Skeleton"
 authors = ["James Sawdy <james.sawdy@cgi.com>"]
 license = "BSD-3-Clause"
-packages = [
-    { include = "ska_python_skeleton", from = "src" }
-]
 
 [tool.poetry.dependencies]
 python = "^3.9"
