@@ -14,10 +14,58 @@ before_script:
 
 
 stages:
+  - lint
+  - build
   - test
-  - linting
-  - publish
   - deploy
+  - publish
+
+
+# Standardised included jobs
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  MINIKUBE: "false"
+
+# Include CI templates
+include:
+# OCI Images
+# do a custom set of build and publish stages
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/oci-image.gitlab-ci.yml'
+
+# Python packages build,lint, test and publish
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/python.gitlab-ci.yml'
+
+# Jupyter notebook linting and testing
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/notebook.gitlab-ci.yml'
+
+# Helm Charts
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/helm-chart.gitlab-ci.yml'
+
+# Docs pages
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/docs-pages.gitlab-ci.yml'
+
+# .post step finalisers eg: badges
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/finaliser.gitlab-ci.yml'
+
+# k8s steps
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/k8s.gitlab-ci.yml'
+
+# changelog release page
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/changelog.gitlab-ci.yml'
+
+# deploy steps
+  - project: 'ska-telescope/templates-repository'
+    file: 'gitlab-ci/includes/deploy.gitlab-ci.yml'
+
+
 
 # The YAML file defines a set of jobs with constraints stating when they should be run.
 # You can specify an unlimited number of jobs which are defined as top-level elements with an arbitrary name and always
@@ -25,18 +73,7 @@ stages:
 # In this case we have only the test job which produces a coverage report and the unittest output (see setup.cfg), and
 #  the coverage xml report is moved to the reports directory while the html output is persisted for use by the pages
 #  job. TODO: possibly a candidate for refactor / renaming later on.
-test:
-  stage: test
-#  tags:
-#   - k8srunner
-  script:
-  #  - pipenv run python setup.py test
-   - python3 setup.py test
-   - mv coverage.xml ./build/reports/code-coverage.xml
-  artifacts:
-    paths:
-    - ./build
-    - htmlcov
+
 
 list_dependencies:
   stage: test
@@ -55,18 +92,6 @@ list_dependencies:
   artifacts:
     paths:
       - public
-
-linting:
-  image: $SKA_PYTHON_PYTANGO_BUILDER_IMAGE
-  tags:
-    - k8srunner
-  stage: linting
-  script:
-    - make lint
-  when: always
-  artifacts:
-    paths:
-      - ./build
 
 pages:
   stage: deploy
