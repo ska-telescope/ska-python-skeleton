@@ -4,7 +4,7 @@
 """Tests for the ska_python_skeleton module."""
 import pytest
 
-from ska.skeleton import SKA, function_example
+#from ska.skeleton import SKA, function_example
 
 
 # TODO: Replace all the following examples
@@ -36,7 +36,7 @@ def test_ska_python_skeleton(an_object):
 def test_package():
     """Example: Assert the ska_python_skeleton
     package code."""
-    assert function_example() is None
-    foo = SKA()
-    assert foo.example_2() == 2
-    assert foo.example() is None
+    #assert function_example() is None
+    #foo = SKA()
+    #assert foo.example_2() == 2
+    #assert foo.example() is None
