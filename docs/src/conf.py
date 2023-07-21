@@ -23,8 +23,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 import sphinx_rtd_theme
 
 def setup(app):
-    app.add_stylesheet('css/custom.css')
-    app.add_javascript('js/github.js')
+    app.add_css_file('css/custom.css')
+    app.add_js_file('js/github.js')
 
 # -- General configuration ------------------------------------------------
 
