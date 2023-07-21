@@ -7,11 +7,6 @@ image: $SKA_PYTHON_PYTANGO_BUILDER_IMAGE
 # If cache is defined outside the scope of jobs, it means it is set globally and all jobs will use that definition
 # cache:
 #   paths:
-# before_script is used to define the command that should be run before all jobs, including deploy jobs, but after the restoration of artifacts.
-# This can be an array or a multi-line string.
-before_script:
-  - python3 -m pip install -r docker-requirements.txt
-
 
 stages:
   - lint
