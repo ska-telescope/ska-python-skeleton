@@ -26,7 +26,7 @@ lint:
 
 .PHONY: all test lint
 
-NOTEBOOK_IGNORE_FILES = not notebook-test.ipynb
+NOTEBOOK_IGNORE_FILES = not notebook.ipynb
 
 #
 # include makefile to pick up the standard Make targets, e.g., 'make build'
