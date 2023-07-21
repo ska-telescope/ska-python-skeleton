@@ -19,6 +19,9 @@ numpy = "^1.25.1"
 setuptools-scm = "^7.1.0"
 jsonschema = "^4.18.4"
 pytest-json-report = "^1.5.0"
+pytest-cov = "^4.1.0"
+pylint = "^2.17.4"
+pytest-json = "^0.4.0"
 
 [tool.poetry.group.dev.dependencies]
 docutils = "<=0.19"

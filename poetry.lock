@@ -1464,6 +1464,19 @@ pytest = ">=4.6"
 testing = ["fields", "hunter", "process-tests", "pytest-xdist", "six", "virtualenv"]
 
 [[package]]
+name = "pytest-json"
+version = "0.4.0"
+description = "Generate JSON test reports"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pytest-json-0.4.0.tar.gz", hash = "sha256:8bf4e1be1691f4416bc12b14785b5ad9e842887b0b2b2d61b37dcb555b208630"},
+]
+
+[package.dependencies]
+pytest = ">=2.3"
+
+[[package]]
 name = "pytest-json-report"
 version = "1.5.0"
 description = "A pytest plugin to report test results as JSON files"
@@ -2285,4 +2298,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "f0ee1a4f534576c730b11682900eb51c34d3db010ad16b3f3a649965a3b9b5f7"
+content-hash = "0d4a1a08ae4fc798b5fed167812a95c1626fe6704f7f7ee6e54ed8391e98a814"
