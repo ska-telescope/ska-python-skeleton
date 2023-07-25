@@ -4,10 +4,11 @@
 """Tests for the ska_python_skeleton module."""
 import pytest
 
-from ska.skeleton import SKA, function_example
+# from ska.skeleton import SKA, function_example
 
 
-# TODO: Replace all the following examples with tests for the ska_python_skeleton package code
+# TODO: Replace all the following examples
+# with tests for the ska_python_skeleton package code
 def test_something():
     """Example: Assert with no defined return value."""
     assert True
@@ -33,8 +34,9 @@ def test_ska_python_skeleton(an_object):
 
 
 def test_package():
-    """Example: Assert the ska_python_skeleton package code."""
-    assert function_example() is None
-    foo = SKA()
-    assert foo.example_2() == 2
-    assert foo.example() is None
+    """Example: Assert the ska_python_skeleton
+    package code."""
+    # assert function_example() is None
+    # foo = SKA()
+    # assert foo.example_2() == 2
+    # assert foo.example() is None

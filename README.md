@@ -8,9 +8,9 @@ Briefly describe your project here
 Requirements
 ------------
 
-The system used for development needs to have Python 3 and `pip` installed.
+The system used for development needs to have Python 3, `pip` and Poetry installed.
 
-Install 
+Install pip
 -------
 
 **Always** use a virtual environment. [Pipenv](https://pipenv.readthedocs.io/en/latest/) is now Python's officially
@@ -40,6 +40,20 @@ Then proceed to install pipenv and the required environment packages:
 You will now be inside a pipenv shell with your virtual environment ready.
 
 Use `exit` to exit the pipenv environment.
+
+
+Install Poetry
+-------
+
+First we need to install Poetry: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+The get-poetry.py script described here will be replaced in Poetry 1.2 by install-poetry.py. From Poetry 1.1.7 onwards, you can already use this script as described as below:
+curl -sSL https://install.python-poetry.org | python3 -
+To manage application dependencies Poetry supports pyproject.toml config file.
+This .toml file have three sections:
+
+* [tool.poetry] — fields that describe our application, some of them are required,
+* [tool.poetry.dependencies] —a list of all the required packages with version numbers,
+* [tool.poetry.dev-dependencies] — a list of the required packages for development purposes: pytest for running unit tests, black for code linting and mypy for static type   check.To install all those dependencies simply run: "poetry install". The dependencies will be installed to the virtual environment created and managed by Poetry by creating poetry.lock file which will resolve and install all the dependencies that are listed in pyproject.toml file. In this way, Poetry handles both the dependencies of our application in one go.
 
 
 Testing
