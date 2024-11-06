@@ -22,11 +22,11 @@ Public API Documentation
 Functions
 ---------
 
-.. automodule:: ska.skeleton
+.. automodule:: src.ska_python_skeleton
     :members:
 
 Classes
 -------
-.. autoclass:: ska.skeleton.SKA
+.. autoclass:: src.ska_python_skeleton.example.SKA
     :noindex:
     :members:
